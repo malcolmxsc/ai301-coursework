@@ -266,19 +266,19 @@ if __name__ == "__main__":
 
 **Reproduction reflection**
 
-My attempt separated overlapping work from inconsistent output. The controlled pause exposed two same-profile entries, but the current helpers returned fixed feedback, so I reported that I could not reproduce inconsistent results. The unrelated ingestion error and unavailable vector store further limit the test. A later investigation needs a stateful workload before claiming stale reads or corrupted feedback.
+The probe showed overlapping same-profile processing, but the placeholder helpers produced identical feedback. I reported that limit rather than claiming inconsistent output was reproduced.
 
 ## Eval iterations
 
 **Run history**
 
-The runs below used the canonical installed files at `~/.claude/skills/repro-check/`, with `--skill`, `--rubric`, and `--evidence` pointing to that copy. The JSON results are included in `eval-details/`; revision snapshots are retained in the Unit 2 starter clone's `eval/iterations/` directory. The hand calibration of `calib-02` was a reject; it is not a scored harness run.
+All runs used the installed skill at `~/.claude/skills/repro-check/`.
 
-1. Full attempt, v1 (`run-01.json`): all 20 calls errored because Claude's OAuth session had expired. The harness printed `agreement: 0/0 scored items`. This is an authentication failure, not 0/20 rubric agreement; no submission transcript was saved. I restored sign-in before retrying.
-2. First successful full run, v1 (`run-02.json`): `agreement: 18/20 scored items  (bar: 18/20: PASS)`. Categories: clear-accept 6/8, disclosure 1/1, no-evidence 4/4, unfollowable-comms 3/3, wrong-target 4/4. The disagreements were `pkg-03` and `pkg-05`, both rejected on Repository conventions.
-3. Targeted v2 run, `--only pkg-03,pkg-05,pkg-20` (`run-03.json`): `agreement: 2/3 scored items`. I clarified follow-up comment requirements and distinguished AI assistance from a proven violation of human-authorship rules. `pkg-03` accepted; `pkg-20`, the disclosure canary, still rejected. `pkg-05` now passed conventions but failed Steps a stranger can run because the grader demanded the exact dependency list.
-4. Targeted v3 run, `--only pkg-05,pkg-18,pkg-20` (`run-04.json`): `agreement: 3/3 scored items`. I clarified that an unambiguous fixture recipe can suffice when omitted values do not affect the trigger. `pkg-05` accepted; `pkg-18` still rejected on its private, unshared setup, and the disclosure canary still rejected. These partial runs did not establish the category floor or write a submission transcript.
-5. Confirming full v3 run (`run-05.json`) with `--save-run eval-run.txt`: `agreement: 20/20 scored items  (bar: 18/20: PASS)`. Categories: clear-accept 8/8, disclosure 1/1, no-evidence 4/4, unfollowable-comms 3/3, wrong-target 4/4. The harness wrote the transcript, and I copied it to this directory without editing. This is the submitted run.
+1. Full attempt: all 20 calls failed because Claude sign-in had expired. The harness printed `agreement: 0/0 scored items`; no packages were graded.
+2. Full run: `agreement: 18/20 scored items  (bar: 18/20: PASS)`. `pkg-03` and `pkg-05` were incorrectly rejected on Repository conventions.
+3. Targeted run, `--only pkg-03,pkg-05,pkg-20`: `agreement: 2/3 scored items`. After clarifying comment requirements, `pkg-03` accepted and disclosure canary `pkg-20` still rejected. `pkg-05` passed conventions but failed the steps check.
+4. Targeted run, `--only pkg-05,pkg-18,pkg-20`: `agreement: 3/3 scored items`. I clarified when a fixture recipe supplies enough input. `pkg-05` accepted; the private-configuration and disclosure canaries still rejected.
+5. Confirming full run with `--save-run eval-run.txt`: `agreement: 20/20 scored items  (bar: 18/20: PASS)`, with every category matched. The submitted transcript is the unchanged harness-written file.
 
 **Package analysis**
 
@@ -292,13 +292,11 @@ Quoting the pass condition of **Evidence addresses the issue**, exactly as it ap
 
 > At least one artifact shows what happened during the stated attempt and distinguishes the issue's behavior from an adjacent failure. For a claimed reproduction, the artifact demonstrates the reported symptom with its relevant trigger; merely showing that the program runs or that some error occurred is insufficient. For cannot-reproduce, artifacts show the attempted trigger and observed non-failure, with limitations stated.
 
-I chose a comparison between the artifact and the issue rather than a requirement for a long report, a fixed number of steps, or an error screenshot. The operator swap in calibration `calib-03` illustrates the danger: a syntax error from changed HCL input is not the issue's runtime panic, regardless of how polished the explanation is. I kept this check unchanged during the eval revisions; the demonstrated ambiguity was in conventions and input completeness. Its cannot-reproduce clause keeps a useful negative result eligible without claiming the original issue is absent.
+This check requires the output to show the reported behavior: a syntax error cannot count as a runtime panic. It also accepts an evidenced cannot-reproduce result. I kept it unchanged during the eval revisions.
 
 **Trade-offs**
 
-Allowing equivalent diagnostics and concise fixture recipes reduces false rejections of useful follow-up comments, but it gives up a byte-for-byte record of every installed package and incidental message. That can miss a dependency-sensitive condition if I incorrectly judge an omitted value irrelevant. The allowance is limited to values that do not affect the trigger; missing trigger syntax, private configuration, and essential environment details still fail other checks.
-
-I tested that boundary with `pkg-18`: after the steps clarification, the package with a private monorepo and unshared configuration still rejected. Because the conventions revision loosened a policy check, I also reran the single-item disclosure category, `pkg-20`, in both targeted runs; it rejected both times. These canaries support a narrow claim about the revisions, not a claim that every untested package stayed unchanged. The confirming full run checks the whole set.
+Allowing concise fixture recipes can miss a dependency-sensitive condition if an omitted value matters. After this change, I reran `pkg-18` (private configuration) and `pkg-20` (required disclosure); both still rejected. The confirming full run matched all 20 gold labels.
 
 ---
 
