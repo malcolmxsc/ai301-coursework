@@ -282,13 +282,9 @@ The runs below used the canonical installed files at `~/.claude/skills/repro-che
 
 **Package analysis**
 
-`pkg-20` (`ghostty-org/ghostty#13604`): my rubric decided **reject** in the first full run, both targeted canary runs, and the confirming full run; the gold label is **reject**. Its proof is otherwise good: a recorded Ghostty 1.3.1/Fedora/GTK/Wayland environment, a single-theme configuration, the exact scheme query, and a conditional-theme control. The shown results are `^[[?997;2n` for the single theme and `^[[?997;1n` for the conditional pair, so the artifact supports the issue's light-versus-dark discrepancy.
-
-The deciding evidence is the captured policy, which requires disclosure of all AI usage, including the tool and extent. Neither comment discloses assistance. The first full run's Repository conventions evidence reads:
+`pkg-20` (`ghostty-org/ghostty#13604`): my rubric decided **reject**, matching the gold label. Its environment, steps, and artifacts passed the proof checks. It failed Repository conventions because the sample comments omit the AI disclosure required by the captured policy. The harness recorded:
 
 > AI_POLICY requires disclosure of tool and extent of AI use; neither the claim nor the repro report contains any AI disclosure
-
-This is not a generic rule against AI or an inference that every assisted comment is prohibited. It is a missing disclosure under this particular repository's explicit rule. The eval instructions treat these packages as AI-assisted work. The distinction matters because `pkg-03` has a human-authorship rule without a disclosure requirement, while `pkg-05` permits AI with author responsibility. My initial conventions wording blurred these cases.
 
 **Check rationale**
 
