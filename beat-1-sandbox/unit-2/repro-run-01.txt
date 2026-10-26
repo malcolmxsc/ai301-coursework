@@ -1,0 +1,41 @@
+{"commit": "f89c06fc3ff292df2a04a39ac51319d32a76b779", "event": "environment", "os": "macOS-27.0.1-arm64-arm-64bit", "python": "3.12.13", "transport": "in-process HTTPX ASGITransport; real auth, routes, background tasks, PostgreSQL", "versions": {"asyncpg": "0.32.0", "fastapi": "0.162.0", "httpx": "0.28.1", "sqlalchemy": "2.1.6", "starlette": "1.10.0"}}
+{"event": "fixture", "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "source": "fresh local profile owned by seeded user1"}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=5f7952e3-9e7d-4ff7-be53-dd25488e4b84 username=issue33-local-fixture
+{"error": null, "event": "review_result", "label": "baseline-sequential-1", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "59466d87-6c9f-451a-b85d-d90c5a840a73", "score": 0.81, "sections": 3, "status": "complete"}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=3b9e47ae-731f-4395-80a8-df602e200f7c username=issue33-local-fixture
+{"error": null, "event": "review_result", "label": "baseline-sequential-2", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "b945cc63-5b65-4890-b5f5-13a56ad2c7e4", "score": 0.81, "sections": 3, "status": "complete"}
+{"event": "baseline_sequential", "results_equal": true}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=723e958f-6641-4e25-af2e-2887496eca6e username=issue33-local-fixture
+{"error": null, "event": "review_result", "label": "baseline-concurrent-1-A", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "f9143157-e3d3-444e-9c3b-b28f9ff71a1b", "score": 0.81, "sections": 3, "status": "complete"}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=ad5ec3cb-7e7d-4bb8-9bd7-5708f6086efb username=issue33-local-fixture
+{"error": null, "event": "review_result", "label": "baseline-concurrent-1-B", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "90c7e5e0-d283-444f-b0e9-e1db4a01d40e", "score": 0.81, "sections": 3, "status": "complete"}
+{"both_complete": true, "event": "baseline_concurrent", "match_sequential": true, "results_equal": true, "trial": 1}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=9dfe7329-248f-4dbf-ba6f-a9b37c4018e0 username=issue33-local-fixture
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=29a0f683-d8e6-413e-b1a6-d2341a4844ba username=issue33-local-fixture
+{"error": null, "event": "review_result", "label": "baseline-concurrent-2-A", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "fcc9f197-96ba-4b9a-9081-111a30044b2a", "score": 0.81, "sections": 3, "status": "complete"}
+{"error": null, "event": "review_result", "label": "baseline-concurrent-2-B", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "96b5bb06-a399-4a49-a153-7d64c79a5d7e", "score": 0.81, "sections": 3, "status": "complete"}
+{"both_complete": true, "event": "baseline_concurrent", "match_sequential": true, "results_equal": true, "trial": 2}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=0852b2a9-9adb-41d9-be92-97ecd46eacfd username=issue33-local-fixture
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=b8459a9a-c3a3-4dc6-a294-bf4a33af3f48 username=issue33-local-fixture
+{"error": null, "event": "review_result", "label": "baseline-concurrent-3-A", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "fde53f4e-f6fe-40b5-8a64-bdeacbcd75cd", "score": 0.81, "sections": 3, "status": "complete"}
+{"error": null, "event": "review_result", "label": "baseline-concurrent-3-B", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "6db5e667-8860-4c8b-bf61-dc63e78c3bd7", "score": 0.81, "sections": 3, "status": "complete"}
+{"both_complete": true, "event": "baseline_concurrent", "match_sequential": true, "results_equal": true, "trial": 3}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=549ae3ca-8315-48fe-95a3-0c61ce1ddf23 username=issue33-local-fixture
+{"active_for_same_profile": 1, "event": "agent_enter", "label": "controlled-sequential-A", "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "seconds": 0.0067}
+{"active_for_same_profile": 0, "event": "agent_exit", "label": "controlled-sequential-A"}
+{"error": null, "event": "review_result", "label": "controlled-sequential-A", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "62e56de3-eadc-470e-8b12-6655b496a026", "score": 0.81, "sections": 3, "status": "complete"}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=6de1231c-bc79-4d4f-84ce-1e11173bcdd9 username=issue33-local-fixture
+{"active_for_same_profile": 1, "event": "agent_enter", "label": "controlled-sequential-B", "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "seconds": 0.0721}
+{"active_for_same_profile": 0, "event": "agent_exit", "label": "controlled-sequential-B"}
+{"error": null, "event": "review_result", "label": "controlled-sequential-B", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "886eabcf-9200-464d-bbc9-034e2327be66", "score": 0.81, "sections": 3, "status": "complete"}
+{"both_complete": true, "event": "probe_summary", "instrumentation": "runtime agent wrapper; original agent output retained", "maximum_active_same_profile": 1, "mode": "controlled-sequential", "results_equal": true}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=433ed7f7-a26f-44c9-a5b6-80462dc69cba username=issue33-local-fixture
+{"active_for_same_profile": 1, "event": "agent_enter", "label": "controlled-concurrent-A", "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "seconds": 0.0088}
+2026-10-25 17:46:08 [error    ] github_ingestion_failed        error="'raw_data' is an invalid keyword argument for IngestedSource" request_id=60f6ff86-b3e2-43b4-b890-d6c0e494f244 username=issue33-local-fixture
+{"active_for_same_profile": 2, "event": "agent_enter", "label": "controlled-concurrent-B", "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "seconds": 0.0102}
+{"active_for_same_profile": 1, "event": "agent_exit", "label": "controlled-concurrent-B"}
+{"active_for_same_profile": 0, "event": "agent_exit", "label": "controlled-concurrent-A"}
+{"error": null, "event": "review_result", "label": "controlled-concurrent-B", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "3a4c09e0-d3bf-4f30-afb4-67a735ee3cb5", "score": 0.81, "sections": 3, "status": "complete"}
+{"error": null, "event": "review_result", "label": "controlled-concurrent-A", "post_http": 200, "profile_id": "d5ce6993-3301-475b-8e6d-ddce6d44ba56", "review_id": "bb8c699c-34d5-4be0-8903-72e421312c35", "score": 0.81, "sections": 3, "status": "complete"}
+{"both_complete": true, "event": "probe_summary", "instrumentation": "runtime agent wrapper; original agent output retained", "maximum_active_same_profile": 2, "mode": "controlled-concurrent", "results_equal": true}
+{"baseline": "three concurrent pairs compared with sequential requests", "cleanup": "local fixture retained for inspection; no external profiles or LLM calls used", "event": "conclusion", "limitation": "controlled overlap does not by itself demonstrate stale reads or inconsistent output"}

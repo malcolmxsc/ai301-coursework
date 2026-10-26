@@ -1,0 +1,42 @@
+## Repro-check: claim-only grading for issue #33
+
+**Mode:** Live, claim-only draft. Scope confirmed: issue lives in `codepath/pathreview-ai301-fa26-s1` (scope.md's required repo), no placeholder — in scope.
+
+**Issue #33** ("Concurrent review requests for the same profile can produce inconsistent results," label `enhancement`, no comments yet): "If a user submits two review requests simultaneously, both requests start the agent loop against the same profile state. The second agent loop may read stale data modified by the first." Relevant files: `api/routes/reviews.py`, `core/services/review_service.py`.
+
+**Repo conventions gathered:** `docs/CONTRIBUTING.md` asks contributors to "comment on the issue to let others know you're working on it" — no specific claim-comment template, no stated AI-disclosure requirement anywhere in `docs/CONTRIBUTING.md`, the issue templates, or the PR template. Bug-report template fields (repro steps, expected behavior, etc.) are report-only and not demanded pre-investigation per the rubric's claim-only rule.
+
+### Checks
+
+| Check | Grade | Evidence |
+|---|---|---|
+| Specific, bounded claim | **pass** | Claim names the issue's exact symptom ("stale profile state" from concurrent same-profile requests) and a concrete next step ("trace `api/routes/reviews.py` and `core/services/review_service.py`, then try concurrent same-profile requests... compare with sequential"); promises a follow-up report, not a fix or date. |
+| Repository conventions | **pass** | Repo's only stated claim-comment ask ("comment to say you're working on it") is met; no AI-disclosure requirement exists in `CONTRIBUTING.md`/templates, so none is invented — and the draft discloses AI assistance anyway. |
+| Environment recorded | unclear | not yet applicable: claim-only draft |
+| Steps a stranger can run | unclear | not yet applicable: claim-only draft |
+| Evidence addresses the issue | unclear | not yet applicable: claim-only draft |
+| Outcome follows the evidence | unclear | not yet applicable: claim-only draft |
+
+### Voice-guide review
+
+No rule broken. Notably strong adherence:
+- "Promise an investigation I can carry out" — the draft's final sentence ("I will post a reproduction report with the tested commit, environment, runnable steps, and observed output, including any limits if I cannot reproduce") mirrors the guide's own "Right" example almost exactly.
+- "Name assistance and keep responsibility" — "I used AI assistance to prepare this investigation and write-up" satisfies the disclosure rule directly.
+- "Speak as a learner without inflating certainty" — uses "may enter," "try," not asserted as fact.
+
+No house-rule issue (no existing claims on the thread to piggyback on).
+
+```json
+{
+  "item": "https://github.com/codepath/pathreview-ai301-fa26-s1/issues/33",
+  "checks": [
+    {"name": "Specific, bounded claim", "grade": "pass", "evidence": "Names the issue's stale-read symptom and concrete next steps (trace two named files, test concurrent vs sequential requests) without promising a fix or date."},
+    {"name": "Environment recorded", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Steps a stranger can run", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Evidence addresses the issue", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Outcome follows the evidence", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Repository conventions", "grade": "pass", "evidence": "docs/CONTRIBUTING.md only asks contributors to comment that they're working on the issue; no AI-disclosure requirement exists, and the draft discloses assistance anyway."}
+  ],
+  "verdict": "accept"
+}
+```

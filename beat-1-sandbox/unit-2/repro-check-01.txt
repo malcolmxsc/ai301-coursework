@@ -1,0 +1,41 @@
+**Result: accept.** The package is ready to post, with a few voice-guide notes below. Nothing was reproduced, edited or posted.
+
+**Scope:** The issue is in scope. #33 is open in `codepath/pathreview-ai301-fa26-s1` and is titled "Concurrent review requests for the same profile can produce inconsistent results". It asks for a per-profile lock in `api/routes/reviews.py` and `core/services/review_service.py`.
+
+**Repo conventions gathered:**
+- The `bug_report.md` template asks for Describe, To Reproduce, Expected, Relevant Files and Acceptance Criteria. That is a new-issue template, so it doesn't apply to a follow-up comment.
+- `docs/CONTRIBUTING.md` only says to "Comment on the issue". It has no AI or disclosure policy.
+- Your claim is already posted on the issue, and its text matches `claim.md`.
+- The tested commit `f89c06f…` is public on your fork and identical to upstream `main`.
+
+**Checks**
+
+| Check | Grade | Evidence |
+|---|---|---|
+| Specific, bounded claim | pass | It names #33, the two files to trace, and concurrent versus sequential same-profile requests. It promises a report, including limits, and promises no fix or date. |
+| Environment recorded | pass | It gives the commit, macOS 27.0.1 arm64, Python 3.12.13, Docker/Postgres/Redis versions, and package versions. It notes that Chroma crashed and that the in-process ASGI transport differs from a real server. |
+| Steps a stranger can run | pass | It gives clone, checkout, venv, `.env`, `docker compose` and `make setup` steps. The full script is included, using the seeded `user1` account and a fresh fixture profile, so no private data is needed. |
+| Evidence addresses the issue | pass | The log shows `active_for_same_profile: 2` before either exit, against a sequential control with a maximum of 1. The three uninstrumented concurrent trials matched the sequential results. |
+| Outcome follows the evidence | pass | It says it could not reproduce inconsistent output. It claims only the missing serialization, not a stale read or lost update. It also flags the `raw_data` ingestion error as separate from the race. |
+| Repository conventions | pass | The repo states no AI policy and no comment format. Both comments disclose AI assistance anyway. |
+
+**Voice-guide review**
+- **Rule "Name assistance and keep responsibility":** The disclosure is present, but `repro.md:66` says "Codex prepared and executed the setup/probe". The rule asks me to "own the evidence". Consider adding a line that you reviewed the output and ran or verified it yourself.
+- **Mentioning the grading step:** The same line says "Claude Code ran my installed `repro-check` skill on the drafts". That is process detail a stranger doesn't need. It also appears before the grading has finished, so consider dropping it.
+- **Rule "Promise an investigation I can carry out":** The closing "I will use this probe when investigating where a per-profile lock belongs" is fine. It promises investigation, not a fix.
+- **Other rules:** The draft follows "Keep observations separate from explanations", "Make my proof stand on its own" and "Speak as a learner". It breaks none of the "Things I never post".
+
+```json
+{
+  "item": "https://github.com/codepath/pathreview-ai301-fa26-s1/issues/33",
+  "checks": [
+    {"name": "Specific, bounded claim", "grade": "pass", "evidence": "Claim names #33, api/routes/reviews.py and core/services/review_service.py, a concurrent-vs-sequential test, and promises a report with limits; no fix or date promised."},
+    {"name": "Environment recorded", "grade": "pass", "evidence": "Commit f89c06fc…, macOS 27.0.1 arm64, Python 3.12.13, Docker/Postgres 16.15/Redis 7.4.11, package versions; Chroma failure and in-process ASGITransport differences disclosed."},
+    {"name": "Steps a stranger can run", "grade": "pass", "evidence": "Clone/checkout of public commit, setup commands, full runnable repro_issue_33.py using seeded user1 and a fresh fixture profile; no private data needed."},
+    {"name": "Evidence addresses the issue", "grade": "pass", "evidence": "Log shows active_for_same_profile 2 before either agent_exit in concurrent probe vs max 1 in sequential control; baseline concurrent trials showed equal results."},
+    {"name": "Outcome follows the evidence", "grade": "pass", "evidence": "States 'could not reproduce inconsistent review output'; claims only missing serialization, not stale reads; ingestion error and placeholder agent noted as limits."},
+    {"name": "Repository conventions", "grade": "pass", "evidence": "docs/CONTRIBUTING.md only asks to comment on the issue and states no AI policy; both comments disclose AI assistance anyway; bug_report.md template is for new issues."}
+  ],
+  "verdict": "accept"
+}
+```

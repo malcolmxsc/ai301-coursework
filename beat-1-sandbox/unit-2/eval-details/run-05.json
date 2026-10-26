@@ -1,0 +1,868 @@
+{
+  "rubric": "/Users/malcolmgriffin/.claude/skills/repro-check/rubric.md",
+  "evidence": "/Users/malcolmgriffin/.claude/skills/repro-check/references/evidence-guide.md",
+  "model": "sonnet",
+  "agreement": [
+    20,
+    20
+  ],
+  "results": [
+    {
+      "id": "pkg-01",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names the missing Content-Type with exactly one custom header and plans to check apply_missing_repeated_headers() against multidict versions; no fix or date promised; the report backs the 'can reproduce' statement"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "Environment: HTTPie 3.2.4 (pip), Python 3.12.4, multidict 6.6.0, macOS 14.5 (arm64)"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Literal command `http --offline post pie.dev/post 'header1: xyz' x=1` plus a no-header control; matches the issue's one-header JSON-body trigger"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "One-header output lacks Content-Type; control output shows Content-Type: application/json, isolating the symptom"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "'with exactly one custom header present, the Content-Type header is absent ... With zero custom headers it is set correctly'; no cause or universality asserted"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Template asks for latest version (3.2.4 stated) and minimal repro steps (provided); repo states no AI policy, so no disclosure required"
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-02",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Steps a stranger can run",
+        "Evidence addresses the issue",
+        "Outcome follows the evidence"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "Claims 'I have reproduced the crash locally', but the report shows a parser error rather than the panic, so the claimed testing is unsupported; the claim also never names the `:-N` offset-from-end syntax or the capacity overflow"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "bat 0.26.1 (installed via cargo), rustc 1.96.0, Fedora 44 (x86_64), kernel 7.0.11"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "Runs `--line-range '18446744073709551614:'` instead of the issue's `:-18446744073709551614`, so the offset-from-end trigger is never exercised"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "fail",
+          "evidence": "Artifact is `error: Invalid value for '--line-range'...` with exit 1, a validation error, not the `capacity overflow` panic with exit 101"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "Asserts 'crash is confirmed' and 'fully reproducible' though the output is a graceful error on different input; confirms a different failure"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "No stated AI policy, so no disclosure is required; the report supplies steps, actual and expected behavior, install method and version info"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-03",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names reading the standard printer in grep-printer to see where line numbers are computed for adjacent replaced matches; no fix or date promised"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "ripgrep 15.2.0 (cargo install), Arch Linux x86_64; notes the issue was filed against 13.0.0"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Exact 12-line test.txt from the issue plus full command `rg -nU '...' -r '$1' test.txt`, including the --replace trigger"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Pasted output 1:fnord 2:boccob 3:d321fdddffff 4:clowns versus expected 1,4,7,10 shows the wrong-line-number symptom"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "States behavior unchanged on 15.2.0 with expected vs actual; no unsupported cause claim; the no -r control is stated, not shown, which is minor"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Supplies template asks (version, install, OS, steps, actual, expected); policy requires human-written comments with no disclosure rule, and the wording is specific and human-owned"
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-04",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Environment recorded",
+        "Steps a stranger can run",
+        "Evidence addresses the issue",
+        "Outcome follows the evidence",
+        "Repository conventions"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "\"+1 also seeing this!! ... any updates on a fix??\" names no issue detail or investigation step"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "fail",
+          "evidence": "No version, OS, shell, or terminal size stated in the report"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "No commands, payload, or input with tabs; only \"Can confirm this happens for me too\""
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "fail",
+          "evidence": "No output, screenshot, or measurement; it only refers to \"the screenshots\" in the thread"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "\"definitely still a bug\" and \"exactly the same behavior\" are asserted with no artifact"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "fail",
+          "evidence": "Template asks for OS, shell, and steps to reproduce; none are supplied"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-05",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names EnvironmentSectionNotValid and --json stderr routing; commits to tracing the exceptions path, no fix or date promised"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "conda 26.7.0 (miniforge3), Python 3.12.7, macOS 15.5 osx-arm64, libmamba solver"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Minimal env.yml with valid dependencies plus a 'category:' section, and the exact command `conda env update --quiet --json -f env.yml 2>/dev/null`"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Stdout shows the warning above the JSON with stderr discarded; json.tool fails with 'Expecting value: line 1 column 1 (char 1)'"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Reports reproduction, separates expected from actual, claims no root cause beyond the output"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Equivalent environment info stands in for conda info/list; the repo's AI policy requires no disclosure; no title or duplicate search needed in a comment"
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-06",
+      "verdict": "reject",
+      "failed_checks": [
+        "Environment recorded",
+        "Steps a stranger can run",
+        "Repository conventions"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names tunnel manager's parsing of Windows `route` output as next step; no fix/date promised; report supports the 'reproducing' statement"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "fail",
+          "evidence": "No minikube version, OS, or driver stated anywhere in the report; issue's vmware driver difference unacknowledged"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "Bare `minikube start` omits the issue's --driver vmware and --cleanup; log shows svc/hello-node patched but the service setup is never described"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Log shows repeated `route ADD 10.96.0.0 MASK ...` followed by `error adding route: exit status 1, retrying`, matching the issue's endless route-add loop"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Claims reproduced endless loop, which the excerpt shows; no cause asserted beyond the claim's stated plan to investigate"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "fail",
+          "evidence": "Template asks for OS and driver (and minikube logs); report supplies no OS/driver or equivalent; no AI policy so no disclosure required"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-07",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names the FES translation bug and the next step 'reading how the translator loads locale files relative to when FES fires'; no fix or date promised."
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "'p5.js 1.11.7 (CDN single file), Chrome 139.0 on macOS 14.6', Japanese-first language order; newer version than the issue's is acknowledged."
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "CDN HTML setup, literal sketch with `let value = 0;` in setup, language-priority change and reload; matches the issue's trigger."
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Japanese-first console shows the exact TypeError 'reading replaceAll' / 'translator called before translations were loaded'; the English-first control shows the normal FES message."
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "States the bug is still present on 1.11.7 in the tested setup, matching the shown output; no root cause is asserted."
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Covers the template's version, OS, browser, actual, expected, and snippet asks; discloses assistive AI use, which the policy allows."
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-08",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Steps a stranger can run",
+        "Evidence addresses the issue",
+        "Outcome follows the evidence"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "Claims \"a full reproduction and analysis\" and understanding of \"compiler internals\", which the report does not support."
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "\"jq 1.8.2 (Homebrew), macOS 15.5 (arm64)\" gives version, OS, install method and architecture."
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "Runs `path({} as {$b} | $b)` rather than the issue's `path({} as {$a} | .)`, so it does not exercise the issue's trigger."
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "fail",
+          "evidence": "Shows a compile error \"$b is not defined\", not the issue's runtime \"Invalid path expression near attempt to access element \\\"a\\\" of {}\"; an adjacent failure."
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "Asserts \"100% reproducible\", \"conclusively demonstrates\" and a two-machine run, but the artifact is a different error on changed input and shows no second machine."
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Report covers description, steps, expected/actual and environment; the repo states no AI policy, so no disclosure is required."
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-09",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names scenario 2 (argument-size flush reordering) and the thread's acceptance test; no fix or date promised; the work it describes is backed by the report."
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "fd 10.4.2 (pacman), Arch Linux x86_64, kernel 6.15, ARG_MAX = 2097152; notes its ARG_MAX differs from what the trigger may need."
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Literal file-generation loop and exact fd --exec-batch command plus log check; limited attempt is acknowledged as possibly not hitting the trigger."
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Actual /tmp/order.log output (ONE x3 then TWO x3) from the stated attempt shows non-failure; limitations on reaching the trigger are stated."
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "States 'could NOT reproduce scenario 2' on this setup, scenario 1 untested; explanations hedged as 'may', no causal claim."
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Supplies version and OS asks of the template; policy has no disclosure ask for issue comments and wording is in the author's own voice."
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-10",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names contract_repo_path's None path and a macOS+fish next step; no fix/date promised."
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "starship 1.26.0 (cargo install), zsh 5.9, Ubuntu 24.04 x86_64; OS and shell differences from macOS+fish acknowledged."
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Literal mkdir/git init/ln -s/config/cd commands matching the issue layout; untested logical-PWD trigger condition stated."
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Prompt output 'monorepo/packages/app-dir on  master' shows the module rendering after the attempted trigger; limitations stated."
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Concludes 'cannot reproduce on Linux + zsh'; the PWD explanation is hedged ('suggests', 'looks necessary')."
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Version, shell, OS, config, and expected/actual are provided in equivalent form; no AI policy stated, so no disclosure required."
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-11",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names character class deciding emitter style; plans to verify whether vendored go-yaml carries yaml/go-yaml#357 and report back; no fix/date promised"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "\"yq 4.53.3 (Homebrew), macOS 15.5 (arm64)\"; difference from Linux/pacman acknowledged"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "printf commands create some.yml and broken.md literally; exact yq eval load_str command given"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "\ud83d\udea7 output is double-quoted single line with \\n escapes; \u2705 control emits `longDescription: |` block"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Conclusion matches outputs; \"seems\" hedges the character-class hypothesis; no root-cause assertion"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Supplies version, OS, install method, input, command, actual and expected; repo has no stated AI policy so no disclosure required"
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-12",
+      "verdict": "accept",
+      "failed_checks": [],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names comment-first range boundary behavior and a next step of tracing the closing boundary from the #12964 fix; no fix or date promised."
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "prettier 3.9.6 (npm), Node 22.23.1, macOS 14.6 arm64; difference from 3.8.4 stated."
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "`node repro.mjs` with the parser and both ranges stated; the inputs are public in the issue, though the report's 'issue's script verbatim' wording overstates what the issue contains."
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Outputs show `};);` (re-parse SyntaxError at 4:2) and `};;`, matching the issue's two corruptions."
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Concludes both shapes reproduce on 3.9.6, which the shown outputs support; no root-cause claim."
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Report gives version, runnable repro, actual and expected output; the input is publicly in the issue; the AI policy has no disclosure requirement."
+        }
+      ],
+      "error": null,
+      "gold": "accept",
+      "calibration": false
+    },
+    {
+      "id": "pkg-13",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Environment recorded",
+        "Steps a stranger can run",
+        "Evidence addresses the issue",
+        "Outcome follows the evidence",
+        "Repository conventions"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "\"Assigning myself to this, I know exactly what the reporter is talking about\" demands assignment, names no issue detail and states no investigation step"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "fail",
+          "evidence": "Only \"Windows 11\" and hardware (RTX 4080, 64 GB); no Terminal version, build number or install method"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "No commands or setup; only \"long Claude Code sessions \u2026 after a few hours\""
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "fail",
+          "evidence": "No output, logs, measurements or screenshots; no DWM restart shown to recover it"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "\"100% confirm\", \"guaranteed reproducible\" and \"definitely the DWM bug\" are asserted with no artifacts or DWM test"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "fail",
+          "evidence": "Template asks for Terminal version, Windows build, steps, and expected and actual behavior; the report gives almost none of them (no AI policy, so no disclosure needed)"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-14",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Environment recorded",
+        "Steps a stranger can run",
+        "Evidence addresses the issue",
+        "Outcome follows the evidence",
+        "Repository conventions"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "Claims \"I have reproduced the dead pane on my machine\", but the report shows no dead pane."
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "fail",
+          "evidence": "Windows 11 10.0.26100 / Windows Terminal vs the issue's Windows 10.0.26200 / Alacritty; the difference is not acknowledged and no shell is named."
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "\"created the 3-tab layout file from the issue\" gives no layout contents, no launch command and no dump-screen step."
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "fail",
+          "evidence": "Only a version string, `zellij ls` and a screenshot of three visible tabs; no blank or unresponsive pane is shown."
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "Actual: \"tabs are all present\", yet it concludes \"confirms the bug report's scenario is reproducible\"; expected and actual are inverted."
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "fail",
+          "evidence": "The template requires a minimal reproduction and none is supplied; version, OS and terminal are present, and no AI policy is stated."
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-15",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Steps a stranger can run",
+        "Evidence addresses the issue",
+        "Outcome follows the evidence"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "Claims 'already reproduced it and tracked down the root cause' but the report has no artifacts to support that; the only next step is a vague 'fix approach to discuss soon'"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "Report states 'Environment: Joplin 3.7.10, Windows 11' (the tester's own); install/build details absent but version and OS identify the attempt"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "No steps, inputs or trigger sequence given; report only asserts it reproduced the bug"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "fail",
+          "evidence": "No output, logs, screenshots or recording; only the claim 'the change is lost, exactly as the issue describes'"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "Asserts 'I verified this race condition is the cause' and 'I am confident' about loadNote cancelling the debounced save with no supporting artifact; hypothesis stated as verified cause"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Gives version, OS, expected and actual behavior as a follow-up comment; repo states no AI policy so no disclosure required"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-16",
+      "verdict": "reject",
+      "failed_checks": [
+        "Environment recorded",
+        "Outcome follows the evidence",
+        "Repository conventions"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names Index.set_names and 'investigate whether tuple names should be wrapped as scalars there and report back'; no fix or date promised"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "fail",
+          "evidence": "Tested pandas 1.5.3 / Python 3.10.12 / Ubuntu, versus the issue's latest/main on macOS arm64; the material version difference is never acknowledged"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Literal snippet with the tuple name (1, 2, 3) and the reset_index().rename_axis((1, 2, 3)) trigger"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Shows ValueError 'Length of new names must be 1, got 3' from rename_axis after successful creation with a tuple name"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "States 'The crash the issue describes is confirmed' from a 1.5.3 run only, with no limit to the tested setup and no check on the latest version or main"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "fail",
+          "evidence": "Template asks for confirmation on latest version and main plus pd.show_versions(); the report gives only a one-line environment on an old release and no confirmation on latest or main"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-17",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Steps a stranger can run",
+        "Evidence addresses the issue",
+        "Outcome follows the evidence"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "Claims \"fully reproduced\" and \"confirmed it on the Store release\", which the report's no-crash observation doesn't support; it states verified work rather than intent"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "Terminal 1.24.11911.0 (Store), Windows 11 26H2 Build 26300.9032, PowerShell 7.6.4, Sixel module 1.1.2"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "Runs ConvertTo-Sixel on a Store release with an unsupplied PNG; doesn't exercise the git-main Release-build trigger and doesn't acknowledge the difference"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "fail",
+          "evidence": "\"The window remained open afterward and the prompt returned\"; raw escape text shows an adjacent failure, not the reported terminal crash"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "fail",
+          "evidence": "Asserts \"verifiably broken\" and \"not limited to git-main builds\" although no crash was observed; confirms a different failure and overgeneralizes"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Covers version, Windows build, software, steps, expected and actual; no AI policy stated in repo facts"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-18",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim",
+        "Steps a stranger can run",
+        "Repository conventions"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "Only next step is 'coordinate with the upstream gomodguard issue as needed'; 'we hit this exact crash' is a same-here claim backed by an unshareable private repro"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "golangci-lint v1.55.2 (binary release), Go 1.21, macOS 14"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "fail",
+          "evidence": "Private monorepo, private .golangci.yml and blocked-modules list, internal pre-commit hook; no public fixture or construction recipe"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Output shows nil-pointer panic in gomodguard Processor.processFiles and 'can't run linter goanalysis_metalinter: panic occurred', matching the issue"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Claims reproduction in tested setup with panic output; layout cause hedged ('looks essential') with a root-go.mod scratch control"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "fail",
+          "evidence": "Template asks for configuration and a code example; report withholds both as private with no minimal equivalent; no AI policy stated so no disclosure required"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-19",
+      "verdict": "reject",
+      "failed_checks": [
+        "Specific, bounded claim"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "fail",
+          "evidence": "\"Kindly assign it to me, I will fix it within 2 days guaranteed\" demands assignment, guarantees a fix and date, and names no issue-specific investigation step"
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "@vue/compiler-sfc 3.6.0-rc.2 via official SFC playground, Chrome 139, macOS 14.6"
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Opened the issue's playground link and re-created the issue's exact scoped style block (selector list, :deep member, nested > span)"
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Output shows `.a,` unscoped while `.b[data-v-7ba5bd90] .c` is scoped, matching the issue's symptom"
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Reports Actual: `.a` has no scope attribute, which the shown output supports; no unsupported root-cause claim"
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "pass",
+          "evidence": "Report supplies version, steps, expected and actual; no AI policy stated in repo facts"
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    },
+    {
+      "id": "pkg-20",
+      "verdict": "reject",
+      "failed_checks": [
+        "Repository conventions"
+      ],
+      "checks": [
+        {
+          "name": "Specific, bounded claim",
+          "grade": "pass",
+          "evidence": "Names single non-conditional theme mode-2031 symptom and the next step: test the issue's draft patch against both configs and report back before a PR; no fix/date promised."
+        },
+        {
+          "name": "Environment recorded",
+          "grade": "pass",
+          "evidence": "\"ghostty 1.3.1 (release build, Fedora 42 RPM), GTK backend, GNOME 48 (Wayland), dark system scheme\"."
+        },
+        {
+          "name": "Steps a stranger can run",
+          "grade": "pass",
+          "evidence": "Config content `theme = Kitty Default`, full launch command with --config-default-files=false --config-file --window-theme=dark, and the printf '\\033[?996n' query, plus a control config."
+        },
+        {
+          "name": "Evidence addresses the issue",
+          "grade": "pass",
+          "evidence": "Captured `^[[?997;2n` for single theme vs `^[[?997;1n` for conditional pair, showing the issue's distinctive wrong-scheme symptom with a control."
+        },
+        {
+          "name": "Outcome follows the evidence",
+          "grade": "pass",
+          "evidence": "Conclusion \"matching the issue on a release build\" agrees with the two captures; no root-cause or universality claim beyond the evidence."
+        },
+        {
+          "name": "Repository conventions",
+          "grade": "fail",
+          "evidence": "AI_POLICY.md requires disclosure of AI use (tool and extent) in comments; neither the claim nor the repro report discloses any AI assistance."
+        }
+      ],
+      "error": null,
+      "gold": "reject",
+      "calibration": false
+    }
+  ]
+}

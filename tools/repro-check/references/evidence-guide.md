@@ -1,0 +1,33 @@
+# Evidence guide: where proof lives in a reproduction package
+
+In eval mode the frozen bundle is the whole world: read Issue, Thread highlights, Repo facts, Candidate claim comment, and Candidate repro report. Never fetch the live source issue or fill gaps from personal knowledge. In live mode read the installed scope first, then the issue body and relevant maintainer replies, the repo's README/setup docs, CONTRIBUTING and any linked AI policy, and applicable issue templates under `.github/ISSUE_TEMPLATE/`. Read the actual draft comments as the candidate package. A local file the comments neither include nor publicly link does not supply missing proof.
+
+## Environment
+
+**Where it lives:** In eval, compare the issue's reported setup with the candidate repro report's environment line, version/build output, configuration, and installation notes; Repo facts identifies requested fields. Live, compare those same parts of the draft with the issue and repo's documented setup/version requirements.
+
+**What good looks like:** A reader can identify the tested release or commit and OS, plus the variables this behavior depends on, such as shell, runtime, driver, locale, or debug versus release build. An explicitly stated newer version or different platform is a legitimate test; the report must name material differences and limit its conclusion accordingly. A version banner alone does not establish a whole environment, and the reporter's OS does not establish the tester's OS.
+
+## Steps
+
+**Where it lives:** In eval, read the report's preparation, literal input/configuration, commands or UI actions and their order against the issue's trigger. Live, use the posted draft and its public fixtures, with the repo docs for ordinary installation prerequisites.
+
+**What good looks like:** A stranger can create the required starting state, run the actual input and options, and reach the attempted trigger. Inspect exact operators, flags, input syntax, state, and timing rather than accepting “same command” at face value. Missing private monorepo files or unexplained personal configuration make an attempt unfollowable. Short steps are sufficient when they provide the necessary state; a full reinstall transcript is unnecessary. Inputs may be given literally or by an unambiguous construction recipe when omitted values are irrelevant to the trigger. For a failure caused by an unknown configuration key, a valid minimal configuration plus that named key can suffice without the original dependency list. The rerun must reach the decisive failure; incidental success-message wording need not be byte-identical. Do not extend this allowance to missing trigger syntax, required private configuration, or input choices that determine the behavior. A limited cannot-reproduce attempt can pass when it gives runnable steps and identifies the untested trigger conditions.
+
+## Behavior shown
+
+**Where it lives:** In eval, find the actual command output, error excerpt, screenshots, measurements, or observable state in Candidate repro report; compare it with the Issue description and relevant Thread highlights. Live, inspect the same artifacts included in or publicly linked from the repro draft, not unposted terminal history.
+
+**What good looks like:** The artifact shows the decisive symptom: for example, an empty stash list plus an untracked file, a particular panic, or overlapping agent runs for one profile. A parser validation error does not demonstrate a runtime panic, a version command does not show a failed UI state, and garbled text does not prove process death. A control can clarify what changed but is not universally mandatory. For cannot-reproduce, output from an actual attempt should show the observed non-failure and enough context to connect it to the trigger; “works for me” supplies no artifact.
+
+## Honesty
+
+**Where it lives:** Read the claim's assertions and the report's expected/actual, conclusion, and analysis alongside their quoted artifacts. Compare assertions about versions, environments, number of runs, affected users, and root cause with what the package actually supports.
+
+**What good looks like:** The conclusion says precisely what the attempt established, including “could not reproduce on this setup” or “inconclusive” when warranted. Expected behavior is distinguished from observed output. A plausible explanation from the issue remains a hypothesis until the report supplies evidence for it. A changed environment does not establish that the original bug is absent; a failure on changed input does not establish that the original bug is present. Do not require a fix or a successful reproduction to accept an honest, useful report.
+
+## Comms
+
+**Where it lives:** Read Candidate claim comment against the Issue and Thread highlights; read both comments against Repo facts' bug-report template and contribution policy, including linked AI rules quoted there. In live mode fetch the actual issue and relevant repository docs/templates and compare with both drafts. Voice-guide rules are an additional live-mode review, not hidden eval checks.
+
+**What good looks like:** The claim identifies this issue's specific behavior and the next investigation or verification step. An early claim promises a report, without pretending the reproduction already happened or guaranteeing a fix/date. Follow the repo's substantive reporting asks in the context of a follow-up comment. Equivalent relevant information can satisfy a diagnostic request: a report can state the tested version, platform, installation, runtime, and solver without dumping all of `conda info` or `conda list`. Do not demand new-issue administrative fields such as title or duplicate search again in a comment. If a policy explicitly makes exact output mandatory for a comment, enforce it. Headings, prose length, and a full PR checklist are not requirements for an issue comment. Required AI disclosure must be present in the comments themselves; assume course eval packages are AI-assisted, so silence cannot bypass a disclosure requirement. Separate AI-assisted work from proven AI-generated wording. A human-authorship policy is assessed from the comment’s specific, human-owned wording and any explicit provenance; the course assumption of assistance alone does not establish prohibited authorship or create a disclosure requirement. If a repo permits AI with author responsibility but asks for no disclosure, do not invent one. If no policy is stated, that alone is no failure. In Path Review live mode, other students' claims never block my own and my report must supply my own proof rather than “same as above.”

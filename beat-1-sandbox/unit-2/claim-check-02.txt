@@ -1,0 +1,38 @@
+## Live claim-only grading: issue #33
+
+**Scope:** `codepath/pathreview-ai301-fa26-s1` is the scoped repo, so the issue is in scope. Issue #33 is open and has no comments. Nobody else has claimed it, and a classmate's claim wouldn't block yours anyway.
+
+**Issue (live):** "Concurrent review requests for the same profile can produce inconsistent results." Two simultaneous reviews start the agent loop against the same profile state, and the second may read stale data. The issue names `api/routes/reviews.py` and `core/services/review_service.py`. It proposes a per-profile lock.
+
+**Repo conventions (live):**
+- `docs/CONTRIBUTING.md` says to "Comment on the issue to let others know you're working on it."
+- The bug-report template covers new issues, not claim comments.
+- I found no AI policy in the README, CONTRIBUTING, or the template. No disclosure is required.
+
+**Checks**
+- **Specific, bounded claim: pass.** The claim names the behavior (same-profile requests entering the agent loop together and reading stale state). It names both files from the issue. It gives a concrete step: run concurrent same-profile requests and compare them with sequential ones. It promises a report, not a fix or a date. It doesn't demand assignment.
+- **Repository conventions: pass.** The comment tells others you're working on the issue, as CONTRIBUTING asks. No template fields or AI rules apply to a claim. The AI disclosure ("I used AI assistance…") is present although no policy requires it, which does no harm.
+- **Environment recorded, Steps a stranger can run, Evidence addresses the issue, Outcome follows the evidence: unclear.** These depend on the repro report, which isn't written yet, so they're excluded from the verdict.
+
+**Voice-guide review:** The draft breaks none of your rules.
+- *Promise an investigation I can carry out:* it promises a test and a report, with no fix, deadline, or guaranteed reproduction.
+- *Keep observations separate from explanations:* "may enter… and read stale profile state" is framed as the issue's hypothesis. It claims no mechanism.
+- *Name assistance and keep responsibility:* disclosure is present. You could add that the report will separate commands you ran from untested explanations, as your right-hand example does. That's optional.
+- *Speak as a learner:* the draft doesn't overclaim, and it commits to stating limits if you can't reproduce.
+
+Nothing was posted, edited, or reproduced.
+
+```json
+{
+  "item": "https://github.com/codepath/pathreview-ai301-fa26-s1/issues/33",
+  "checks": [
+    {"name": "Specific, bounded claim", "grade": "pass", "evidence": "Names same-profile concurrent reviews entering the agent loop, both files from the issue, and a concurrent-vs-sequential test, and promises only a report (no fix or date)."},
+    {"name": "Environment recorded", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Steps a stranger can run", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Evidence addresses the issue", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Outcome follows the evidence", "grade": "unclear", "evidence": "not yet applicable: claim-only draft"},
+    {"name": "Repository conventions", "grade": "pass", "evidence": "CONTRIBUTING.md asks contributors to comment on the issue to say they're working on it; no AI policy found, and the draft discloses AI assistance anyway."}
+  ],
+  "verdict": "accept"
+}
+```
